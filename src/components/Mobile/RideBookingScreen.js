@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { apiBookRide } from '../../api/api';
 
 const RideBookingScreen = () => {
   const navigate = useNavigate();
@@ -14,13 +15,18 @@ const RideBookingScreen = () => {
     femaleDriver: false
   });
 
-  const confirmRide = () => {
+  const confirmRide = async () => {
     if (!pickup || !dropoff) {
       setError('Both pickup and dropoff addresses are required.');
       return;
     }
-    // In production, make an API call here
-    navigate('/rideTracking');
+    try {
+      const rideData = { pickupLocation: pickup, dropoffLocation: dropoff, scheduledAt: scheduledTime, advancedOptions };
+      await apiBookRide(rideData);
+      navigate('/rideTracking');
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -32,13 +38,13 @@ const RideBookingScreen = () => {
         <TextField fullWidth margin="normal" label="Scheduled Time" type="datetime-local" value={scheduledTime} onChange={e => setScheduledTime(e.target.value)} />
         <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2 }}>
           <Button variant="outlined" onClick={() => setAdvancedOptions(prev => ({ ...prev, quietRide: !prev.quietRide }))}>
-            {advancedOptions.quietRide ? 'Quiet: ON' : 'Quiet: OFF'}
+            {advancedOptions.quietRide ? 'Quiet Ride: ON' : 'Quiet Ride: OFF'}
           </Button>
           <Button variant="outlined" onClick={() => setAdvancedOptions(prev => ({ ...prev, petFriendly: !prev.petFriendly }))}>
-            {advancedOptions.petFriendly ? 'Pet: ON' : 'Pet: OFF'}
+            {advancedOptions.petFriendly ? 'Pet Friendly: ON' : 'Pet Friendly: OFF'}
           </Button>
           <Button variant="outlined" onClick={() => setAdvancedOptions(prev => ({ ...prev, femaleDriver: !prev.femaleDriver }))}>
-            {advancedOptions.femaleDriver ? 'Female: ON' : 'Female: OFF'}
+            {advancedOptions.femaleDriver ? 'Female Driver: ON' : 'Female Driver: OFF'}
           </Button>
         </Box>
         {error && <Typography color="error">{error}</Typography>}

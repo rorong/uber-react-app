@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
 import { useAuth } from '../../contexts/AuthContext';
+import { apiLogin } from '../../api/api';
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -12,13 +13,12 @@ const LoginScreen = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Replace with actual API integration (using fetch/axios)
-    if (email === 'test@example.com' && password === 'Password123') {
-      const fakeToken = 'fake-jwt-token';
-      login(fakeToken);
+    try {
+      const data = await apiLogin(email, password);
+      login(data.token);
       navigate('/otp');
-    } else {
-      setError('Invalid credentials');
+    } catch (err) {
+      setError(err.message);
     }
   };
 

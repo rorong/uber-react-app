@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, TextField, Button, Typography, Box } from '@mui/material';
+import { apiRegister } from '../../api/api';
 
 const RegisterScreen = () => {
   const navigate = useNavigate();
@@ -11,11 +12,11 @@ const RegisterScreen = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // Replace with API call
-    if (email && phone && password.length >= 8) {
+    try {
+      await apiRegister(email, phone, password);
       navigate('/login');
-    } else {
-      setError('Registration failed');
+    } catch (err) {
+      setError(err.message);
     }
   };
 

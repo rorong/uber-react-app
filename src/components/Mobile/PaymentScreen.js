@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Button, Select, MenuItem, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { apiProcessPayment } from '../../api/api';
 
 const PaymentScreen = () => {
   const navigate = useNavigate();
@@ -9,11 +10,12 @@ const PaymentScreen = () => {
   const rideId = 'ride_1234';
   const fare = 20.00;
 
-  const processPayment = () => {
-    if (method === 'card' && fare > 1000) {
-      setError('Card Declined – Please try another card.');
-    } else {
+  const processPayment = async () => {
+    try {
+      await apiProcessPayment({ rideId, method, amount: fare });
       navigate('/home');
+    } catch (err) {
+      setError(err.message);
     }
   };
 

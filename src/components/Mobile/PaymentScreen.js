@@ -8,7 +8,7 @@ const PaymentScreen = () => {
   const [method, setMethod] = useState('card');
   const [error, setError] = useState('');
   const rideId = 'ride_1234';
-  const fare = 20.00;
+  const fare = 20.0;
 
   const processPayment = async () => {
     try {

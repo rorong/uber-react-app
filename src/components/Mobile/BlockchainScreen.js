@@ -5,7 +5,7 @@ const BlockchainScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactionHash, setTransactionHash] = useState('');
   const driverId = 'driver_001';
-  const payoutAmount = 50.00;
+  const payoutAmount = 50.0;
 
   const processPayout = () => {
     setIsLoading(true);

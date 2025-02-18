@@ -1,9 +1,16 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({ token: null, isAuthenticated: false });
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      setAuth({ token, isAuthenticated: true });
+    }
+  }, []);
 
   const login = (token) => {
     setAuth({ token, isAuthenticated: true });

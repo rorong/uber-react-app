@@ -18,7 +18,7 @@ const SystemSettings = () => {
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
-        <Typography variant="h4">System Settings & Geo-Fencing</Typography>
+        <Typography variant="h4">System Settings</Typography>
         <Box sx={{ display: 'flex', gap: 2, my: 2 }}>
           {['General', 'Geo-Fencing', 'API Keys'].map(tab => (
             <Button key={tab} variant={activeTab === tab ? 'contained' : 'outlined'} onClick={() => setActiveTab(tab)}>
@@ -36,7 +36,7 @@ const SystemSettings = () => {
           {activeTab === 'Geo-Fencing' && (
             <>
               <TextField fullWidth label="Geo Radius (km)" type="number" value={settings.geoRadius} onChange={e => setSettings({ ...settings, geoRadius: e.target.value })} margin="normal" />
-              <Typography>[Map Interface Here]</Typography>
+              <Typography>[Map Interface Placeholder]</Typography>
             </>
           )}
           {activeTab === 'API Keys' && (

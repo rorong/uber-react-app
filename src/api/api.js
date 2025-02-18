@@ -27,8 +27,7 @@ export const apiRegister = async (email, phone, password) => {
 };
 
 export const apiVerifyOTP = async (otp) => {
-  // Implement actual OTP verification API call if available
-  // For now, simulate success if otp equals '123456'
+  // Simulate OTP verification; replace with actual API if available.
   if (otp !== '123456') {
     throw new Error('Incorrect OTP');
   }
@@ -67,4 +66,95 @@ export const apiProcessPayment = async (paymentData) => {
     throw new Error(errorData.message || 'Payment processing failed');
   }
   return response.json();
+};
+
+export const apiCancelRide = async (rideId) => {
+  const response = await fetch(`${BASE_URL}/api/rides/cancel`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ rideId })
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Cancel ride failed');
+  }
+  return response.json();
+};
+
+export const apiGetPaymentDetails = async () => {
+  const response = await fetch(`${BASE_URL}/api/payments/details`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Fetching payment details failed');
+  }
+  return response.json();
+};
+
+export const apiGetProfile = async () => {
+  const response = await fetch(`${BASE_URL}/api/users/profile`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Fetching profile failed');
+  }
+  return response.json();
+};
+
+export const apiUpdateProfile = async (profileData) => {
+  const response = await fetch(`${BASE_URL}/api/users/profile`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(profileData)
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Profile update failed');
+  }
+  return response.json();
+};
+
+export const apiGetAddresses = async () => {
+  const response = await fetch(`${BASE_URL}/api/users/addresses`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Fetching addresses failed');
+  }
+  return response.json();
+};
+
+export const apiAddAddress = async (address) => {
+  const response = await fetch(`${BASE_URL}/api/users/addresses`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ address })
+  });
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Adding address failed');
+  }
+  return response.json();
+};
+
+export const apiExportAddressesCSV = async () => {
+  const response = await fetch(`${BASE_URL}/api/users/addresses/export/csv`);
+  if (!response.ok) {
+    throw new Error('Export CSV failed');
+  }
+  return response.text();
+};
+
+export const apiExportAddressesPDF = async () => {
+  const response = await fetch(`${BASE_URL}/api/users/addresses/export/pdf`);
+  if (!response.ok) {
+    throw new Error('Export PDF failed');
+  }
+  return response.text();
 };

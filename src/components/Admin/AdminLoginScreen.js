@@ -23,12 +23,10 @@ const AdminLoginScreen = () => {
         <Typography variant="h4">Admin Login</Typography>
         {error && <Typography color="error">{error}</Typography>}
         <form onSubmit={handleLogin}>
-          <TextField fullWidth margin="normal" label="Username/Email" onChange={e => setUsername(e.target.value)} required />
+          <TextField fullWidth margin="normal" label="Username" onChange={e => setUsername(e.target.value)} required />
           <TextField fullWidth margin="normal" label="Password" type="password" onChange={e => setPassword(e.target.value)} required />
           <Button variant="contained" type="submit" fullWidth sx={{ mt: 2 }}>Login</Button>
         </form>
-        <Typography variant="body2" sx={{ mt: 2 }}>Forgot Password?</Typography>
-        <Typography variant="caption">Note: MFA enabled</Typography>
       </Box>
     </Container>
   );

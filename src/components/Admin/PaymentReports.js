@@ -2,15 +2,15 @@ import React from 'react';
 import { Container, Typography, Table, TableHead, TableRow, TableCell, TableBody, Button, Box } from '@mui/material';
 
 const PaymentReports = () => {
+  // Dummy data
+  const payments = [
+    { id: 'TXN001', user: 'John Doe', rideId: '1001', amount: 20, method: 'card', status: 'completed', date: '2023-01-01' }
+  ];
+
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
-        <Typography variant="h4">Payment & Financial Reports</Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-around', my: 2 }}>
-          <Typography>Total Revenue: $10,000</Typography>
-          <Typography>Pending Payouts: $1,500</Typography>
-          <Typography>Transactions: 200</Typography>
-        </Box>
+        <Typography variant="h4">Payment Reports</Typography>
         <Table>
           <TableHead>
             <TableRow>
@@ -25,18 +25,20 @@ const PaymentReports = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>TXN001</TableCell>
-              <TableCell>John Doe</TableCell>
-              <TableCell>1001</TableCell>
-              <TableCell>$20</TableCell>
-              <TableCell>Card</TableCell>
-              <TableCell>Completed</TableCell>
-              <TableCell>01/01/2023</TableCell>
-              <TableCell>
-                <Button variant="contained" size="small">View</Button>
-              </TableCell>
-            </TableRow>
+            {payments.map(payment => (
+              <TableRow key={payment.id}>
+                <TableCell>{payment.id}</TableCell>
+                <TableCell>{payment.user}</TableCell>
+                <TableCell>{payment.rideId}</TableCell>
+                <TableCell>${payment.amount}</TableCell>
+                <TableCell>{payment.method}</TableCell>
+                <TableCell>{payment.status}</TableCell>
+                <TableCell>{payment.date}</TableCell>
+                <TableCell>
+                  <Button variant="contained" size="small">View</Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         <Box sx={{ mt: 2 }}>

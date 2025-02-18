@@ -47,7 +47,7 @@ function App() {
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/paymentReport" element={<PaymentReportScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
-        <Route path="/rating" element={<RatingScreen rideId="ride_1234" userId="user_001" />} />
+        <Route path="/rating" element={<RatingScreen />} />
         <Route path="/safety" element={<SafetyScreen />} />
         <Route path="/advancedCustomization" element={<AdvancedCustomizationScreen />} />
         <Route path="/aiFeatures" element={<AIFeaturesScreen />} />
@@ -60,7 +60,7 @@ function App() {
         <Route path="/admin/rides" element={<RideManagement />} />
         <Route path="/admin/paymentReports" element={<PaymentReports />} />
         <Route path="/admin/disputes" element={<DisputeDocumentVerification />} />
-        <Route path="/admin/settings" element={<SystemSettings />} />
+        <Route path="/admin/systemSettings" element={<SystemSettings />} />
         <Route path="/admin/notifications" element={<NotificationManagement />} />
         <Route path="/admin/analytics" element={<AnalyticsReports />} />
         <Route path="/admin/support" element={<SupportTicketManagement />} />

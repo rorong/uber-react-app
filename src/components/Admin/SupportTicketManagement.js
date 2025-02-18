@@ -1,7 +1,11 @@
 import React from 'react';
-import { Container, TextField, Select, MenuItem, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography } from '@mui/material';
+import { Container, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography, TextField, Select, MenuItem } from '@mui/material';
 
 const SupportTicketManagement = () => {
+  const tickets = [
+    { id: 'T1001', user: 'Jane Doe', issue: 'App Crash', status: 'open', date: '2023-01-01' }
+  ];
+
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
@@ -26,17 +30,19 @@ const SupportTicketManagement = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>T1001</TableCell>
-              <TableCell>Jane Doe</TableCell>
-              <TableCell>App Crash</TableCell>
-              <TableCell>Open</TableCell>
-              <TableCell>01/01/2023</TableCell>
-              <TableCell>
-                <Button variant="contained" size="small">View</Button>
-                <Button variant="outlined" size="small" sx={{ ml: 1 }}>Close</Button>
-              </TableCell>
-            </TableRow>
+            {tickets.map(ticket => (
+              <TableRow key={ticket.id}>
+                <TableCell>{ticket.id}</TableCell>
+                <TableCell>{ticket.user}</TableCell>
+                <TableCell>{ticket.issue}</TableCell>
+                <TableCell>{ticket.status}</TableCell>
+                <TableCell>{ticket.date}</TableCell>
+                <TableCell>
+                  <Button variant="contained" size="small">View</Button>
+                  <Button variant="outlined" size="small" sx={{ ml: 1 }}>Close</Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Box>

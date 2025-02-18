@@ -1,7 +1,13 @@
 import React from 'react';
-import { Container, TextField, Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Typography } from '@mui/material';
+import { Container, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography, TextField, Select, MenuItem } from '@mui/material';
 
 const UserManagement = () => {
+  // Dummy data
+  const users = [
+    { id: '1', name: 'John Doe', email: 'john@example.com', role: 'driver', status: 'pending' },
+    { id: '2', name: 'Jane Small', email: 'jane@example.com', role: 'rider', status: 'verified' },
+  ];
+
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
@@ -31,17 +37,19 @@ const UserManagement = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>001</TableCell>
-              <TableCell>John Doe</TableCell>
-              <TableCell>john@example.com</TableCell>
-              <TableCell>Driver</TableCell>
-              <TableCell>Pending</TableCell>
-              <TableCell>
-                <Button variant="contained" size="small">Edit</Button>
-                <Button variant="outlined" size="small" sx={{ ml: 1 }}>Verify</Button>
-              </TableCell>
-            </TableRow>
+            {users.map(user => (
+              <TableRow key={user.id}>
+                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell>{user.status}</TableCell>
+                <TableCell>
+                  <Button variant="contained" size="small">Edit</Button>
+                  <Button variant="outlined" size="small" sx={{ ml: 1 }}>Verify</Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Box>

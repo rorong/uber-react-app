@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, TextField, Select, MenuItem, Typography, Button, Box } from '@mui/material';
+import { Container, Typography, Button, Box, TextField, Select, MenuItem } from '@mui/material';
 
 const AnalyticsReports = () => {
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
-        <Typography variant="h4">Analytics & Reports</Typography>
+        <Typography variant="h4">Analytics Reports</Typography>
         <Box sx={{ display: 'flex', gap: 2, my: 2 }}>
           <TextField type="date" />
           <Select defaultValue="rides">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, Button, Box, TextField } from '@mui/material';
 
-const RatingScreen = ({ rideId, userId }) => {
+const RatingScreen = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
   const [error, setError] = useState('');

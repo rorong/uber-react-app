@@ -7,7 +7,7 @@ const HomeScreen = () => {
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 8 }}>
-        <Typography variant="h4">Welcome, John Doe</Typography>
+        <Typography variant="h4">Welcome, User</Typography>
         <Box sx={{ mt: 4 }}>
           <Button variant="contained" fullWidth sx={{ mb: 2 }} onClick={() => navigate('/rideBooking')}>Book a Ride</Button>
           <Button variant="outlined" fullWidth sx={{ mb: 2 }} onClick={() => navigate('/profile')}>Profile</Button>

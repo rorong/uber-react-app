@@ -1,7 +1,13 @@
 import React from 'react';
-import { Container, TextField, Select, MenuItem, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography } from '@mui/material';
+import { Container, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography, TextField, Select, MenuItem } from '@mui/material';
 
 const RideManagement = () => {
+  // Dummy data
+  const rides = [
+    { id: '1001', user: 'John Doe', driver: 'Mike Smith', pickup: 'Location A', dropoff: 'Location B', fare: 20, status: 'in_progress', date: '2023-01-01' },
+    { id: '1002', user: 'Jane Doe', driver: 'Mike Smith', pickup: 'Location C', dropoff: 'Location D', fare: 25, status: 'completed', date: '2023-01-02' },
+  ];
+
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
@@ -11,7 +17,7 @@ const RideManagement = () => {
           <Select defaultValue="all" variant="outlined">
             <MenuItem value="all">All Status</MenuItem>
             <MenuItem value="requested">Requested</MenuItem>
-            <MenuItem value="in_progress">In-Progress</MenuItem>
+            <MenuItem value="in_progress">In Progress</MenuItem>
             <MenuItem value="completed">Completed</MenuItem>
             <MenuItem value="cancelled">Cancelled</MenuItem>
           </Select>
@@ -31,20 +37,22 @@ const RideManagement = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>1001</TableCell>
-              <TableCell>John Doe</TableCell>
-              <TableCell>Mike Smith</TableCell>
-              <TableCell>A</TableCell>
-              <TableCell>B</TableCell>
-              <TableCell>$20</TableCell>
-              <TableCell>In-Progress</TableCell>
-              <TableCell>01/01/2023</TableCell>
-              <TableCell>
-                <Button variant="contained" size="small">View</Button>
-                <Button variant="outlined" size="small" sx={{ ml: 1 }}>Edit</Button>
-              </TableCell>
-            </TableRow>
+            {rides.map(ride => (
+              <TableRow key={ride.id}>
+                <TableCell>{ride.id}</TableCell>
+                <TableCell>{ride.user}</TableCell>
+                <TableCell>{ride.driver}</TableCell>
+                <TableCell>{ride.pickup}</TableCell>
+                <TableCell>{ride.dropoff}</TableCell>
+                <TableCell>${ride.fare}</TableCell>
+                <TableCell>{ride.status}</TableCell>
+                <TableCell>{ride.date}</TableCell>
+                <TableCell>
+                  <Button variant="contained" size="small">View</Button>
+                  <Button variant="outlined" size="small" sx={{ ml: 1 }}>Edit</Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Box>

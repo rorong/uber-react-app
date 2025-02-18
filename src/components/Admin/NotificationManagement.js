@@ -1,7 +1,11 @@
 import React from 'react';
-import { Container, Table, TableHead, TableRow, TableCell, TableBody, Button, Typography, Box } from '@mui/material';
+import { Container, Table, TableHead, TableRow, TableCell, TableBody, Button, Box, Typography } from '@mui/material';
 
 const NotificationManagement = () => {
+  const notifications = [
+    { id: 'N001', dateTime: '2025-01-01 09:00', channel: 'Push', message: 'System Update' }
+  ];
+
   return (
     <Container>
       <Box sx={{ mt: 8 }}>
@@ -17,16 +21,18 @@ const NotificationManagement = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell>N001</TableCell>
-              <TableCell>2025-01-01 09:00</TableCell>
-              <TableCell>Push</TableCell>
-              <TableCell>System Update</TableCell>
-              <TableCell>
-                <Button variant="contained" size="small">Edit</Button>
-                <Button variant="outlined" size="small" sx={{ ml: 1 }}>Delete</Button>
-              </TableCell>
-            </TableRow>
+            {notifications.map(notif => (
+              <TableRow key={notif.id}>
+                <TableCell>{notif.id}</TableCell>
+                <TableCell>{notif.dateTime}</TableCell>
+                <TableCell>{notif.channel}</TableCell>
+                <TableCell>{notif.message}</TableCell>
+                <TableCell>
+                  <Button variant="contained" size="small">Edit</Button>
+                  <Button variant="outlined" size="small" sx={{ ml: 1 }}>Delete</Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         <Button variant="contained" sx={{ mt: 2 }}>Create New Notification</Button>

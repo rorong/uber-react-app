@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Typography, Button, Box } from '@mui/material';
+import { apiGetPaymentDetails } from '../../api/api';
 
 const PaymentReportScreen = () => {
-  const [report, setReport] = useState(null);
+  const [payments, setPayments] = useState([]);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setReport({ totalRevenue: 10000, totalTransactions: 200, pendingPayouts: 1500 });
-    }, 2000);
+    const fetchPayments = async () => {
+      try {
+        const data = await apiGetPaymentDetails();
+        setPayments(data.payments);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchPayments();
   }, []);
 
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 8 }}>
         <Typography variant="h4">Payment Report</Typography>
-        {report ? (
+        {payments.length ? (
           <Box>
-            <Typography>Total Revenue: ${report.totalRevenue}</Typography>
-            <Typography>Total Transactions: {report.totalTransactions}</Typography>
-            <Typography>Pending Payouts: ${report.pendingPayouts}</Typography>
+            {payments.map(payment => (
+              <Box key={payment.id} sx={{ borderBottom: '1px solid #ccc', py: 1 }}>
+                <Typography>Transaction ID: {payment.transactionId}</Typography>
+                <Typography>Amount: ${parseFloat(payment.amount).toFixed(2)}</Typography>
+                <Typography>Method: {payment.method}</Typography>
+                <Typography>Status: {payment.status}</Typography>
+              </Box>
+            ))}
             <Box sx={{ mt: 2 }}>
               <Button variant="outlined" sx={{ mr: 1 }}>Export as CSV</Button>
               <Button variant="outlined">Export as PDF</Button>
@@ -29,7 +40,7 @@ const PaymentReportScreen = () => {
         ) : error ? (
           <Typography color="error">{error}</Typography>
         ) : (
-          <Typography>Loading report...</Typography>
+          <Typography>Loading payment details...</Typography>
         )}
       </Box>
     </Container>
